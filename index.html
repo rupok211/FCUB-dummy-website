@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Capital University of Bangladesh - Clone</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(20, 80, 40, 0.9), rgba(20, 80, 40, 0.7)), url('https://placehold.co/1920x1080/4CAF50/FFFFFF?text=University+Campus');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .notice-ticker {
+            background-color: #1e293b; /* A dark slate color */
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ef4444; /* red-500 */
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ef4444;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Dropdown styles */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            z-index: 1000;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 0.5rem;
+        }
+
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="w-full bg-white shadow-md">
+        <!-- Top Header -->
+        <header class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-3">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <img src="https://placehold.co/80x80/FFFFFF/333333?text=FCUB" alt="FCUB Logo" class="h-16 w-16">
+                </div>
+
+                <!-- Desktop Navigation -->
+                <ul class="hidden lg:flex items-center space-x-6 text-sm font-medium text-gray-700">
+                    <li><a href="#" class="nav-link text-red-500">Home</a></li>
+                    <li><a href="#" class="nav-link">About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link flex items-center">Administration <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#">Governing Body</a>
+                            <a href="#">Management</a>
+                            <a href="#">Faculty Members</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link flex items-center">Faculties <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                         <div class="dropdown-menu">
+                            <a href="#">Faculty of Science</a>
+                            <a href="#">Faculty of Arts</a>
+                            <a href="#">Faculty of Business</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link flex items-center">Admission <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="#">Undergraduate</a>
+                            <a href="#">Postgraduate</a>
+                            <a href="#">Admission Form</a>
+                        </div>
+                    </li>
+                    <li><a href="#" class="nav-link">Result</a></li>
+                    <li><a href="#" class="nav-link">Research</a></li>
+                    <li><a href="#" class="nav-link">Notice</a></li>
+                     <li class="dropdown">
+                        <a href="#" class="nav-link flex items-center">Career <i class="fas fa-chevron-down text-xs ml-1"></i></a>
+                         <div class="dropdown-menu">
+                            <a href="#">Job Openings</a>
+                            <a href="#">Apply Online</a>
+                        </div>
+                    </li>
+                    <li><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Notice Ticker -->
+        <div class="notice-ticker text-white text-sm">
+            <div class="container mx-auto px-4 py-2 flex items-center">
+                <span class="font-bold mr-4 flex-shrink-0">Notice Board:</span>
+                <div class="overflow-hidden flex-grow">
+                    <div class="ticker-content animate-ticker whitespace-nowrap">
+                        <span class="mx-4"><i class="fas fa-bullhorn mr-2"></i>  Admission for Fall 2025 is now open!</span>
+                        <span class="mx-4"><i class="fas fa-calendar-alt mr-2"></i>  Mid-term exam schedule published.</span>
+                        <span class="mx-4"><i class="fas fa-star mr-2"></i>  Congratulations to our programming contest winners!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white p-4">
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Home</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">About</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Administration</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Faculties</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Admission</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Result</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Research</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Notice</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Career</a>
+        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <main class="hero-section text-white relative">
+        <div class="container mx-auto px-4 h-[70vh] flex items-center">
+            <!-- Content -->
+            <div class="w-full md:w-2/3 lg:w-1/2">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">Welcome to FCUB</h1>
+                <p class="text-lg md:text-xl mb-8">Education for Excellence. Be a FCUB Graduate. "Where Our Learners Become Leaders".</p>
+                <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-md transition duration-300">
+                    Learn More <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+             <!-- Slider Controls -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-4">
+                 <button class="bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition duration-300">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                 <button class="bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition duration-300">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+             <!-- Slider position indicator -->
+             <div class="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4 text-sm">
+                <span class="font-bold">01</span>
+                <div class="w-px h-16 bg-white/50"></div>
+                <span class="text-white/70">02</span>
+             </div>
+        </div>
+    </main>
+
+    <!-- Features Section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-white">
+        <div class="bg-blue-900 p-8 flex flex-col items-center text-center hover:bg-blue-800 transition duration-300">
+            <i class="fas fa-university text-4xl mb-4"></i>
+            <h3 class="text-2xl font-semibold mb-2">Admission</h3>
+            <p class="text-sm">Find out how to join our university.</p>
+        </div>
+        <div class="bg-green-800 p-8 flex flex-col items-center text-center hover:bg-green-700 transition duration-300">
+            <i class="fas fa-book-open text-4xl mb-4"></i>
+            <h3 class="text-2xl font-semibold mb-2">Programs</h3>
+            <p class="text-sm">Explore our diverse range of programs.</p>
+        </div>
+        <div class="bg-blue-900 p-8 flex flex-col items-center text-center hover:bg-blue-800 transition duration-300">
+            <i class="fas fa-dollar-sign text-4xl mb-4"></i>
+            <h3 class="text-2xl font-semibold mb-2">Tuition Fees</h3>
+            <p class="text-sm">Information on fees and payments.</p>
+        </div>
+        <div class="bg-green-800 p-8 flex flex-col items-center text-center hover:bg-green-700 transition duration-300">
+            <i class="fas fa-graduation-cap text-4xl mb-4"></i>
+            <h3 class="text-2xl font-semibold mb-2">Scholarship</h3>
+            <p class="text-sm">Discover scholarship opportunities.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 First Capital University of Bangladesh. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">This is a UI clone for educational purposes.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Simple ticker animation
+        const ticker = document.querySelector('.ticker-content');
+        if (ticker) {
+            // This is a simple implementation. For a continuous smooth scroll,
+            // you would clone the content and reset the position.
+            const tickerWidth = ticker.scrollWidth;
+            const animationDuration = tickerWidth / 50; // Adjust speed by changing 50
+            
+            // A keyframe animation would be better but this is a simple JS approach
+            let position = 0;
+            function animateTicker() {
+                position--;
+                if (position < -tickerWidth) {
+                    position = ticker.parentElement.offsetWidth;
+                }
+                ticker.style.transform = `translateX(${position}px)`;
+                requestAnimationFrame(animateTicker);
+            }
+            // A more robust solution might use CSS keyframes.
+            // For now, this is disabled to avoid complexity.
+            // requestAnimationFrame(animateTicker);
+        }
+
+        // Dropdown hover for desktop
+        // The dropdowns are handled by pure CSS (:hover) so no JS is strictly needed for that part.
+        // However, for touch devices, you might want to add click listeners.
+
+        console.log("UI Clone script loaded.");
+
+    </script>
+</body>
+</html>

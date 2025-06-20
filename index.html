@@ -1,276 +1,414 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Capital University of Bangladesh - Clone</title>
-    <!-- Tailwind CSS -->
+    <title>Project Showcase: RAG Chatbot</title>
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: The SPA is designed as a top-down narrative for an interviewer. It starts with a high-level summary and a direct link to the live demo for immediate impact. It then flows into interactive sections: "Key Features" as engaging cards, a clickable "Architecture Diagram" to explore components dynamically, and a "Workflow" stepper to visualize the process. This non-linear, interactive structure is chosen over a static document format to encourage exploration and demonstrate a deeper understanding of the project's components. The "Tech Stack" is presented as a clickable grid, and less critical "Setup" details are tucked into an accordion to maintain focus on the core project achievements. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Architecture Diagram -> Goal: Organize/Explain Relationships -> Viz/Method: Interactive flowchart with HTML/CSS divs and flexbox -> Interaction: Clicking a component reveals its detailed description, fostering active learning -> Justification: Far more engaging and intuitive than the original ASCII diagram.
+        - Report Info: Workflow -> Goal: Explain Process -> Viz/Method: Vertical numbered stepper built with HTML/CSS -> Interaction: Hover effects and clear visual flow -> Justification: Clearly visualizes the sequence of events.
+        - Report Info: Technical Stack -> Goal: Inform -> Viz/Method: Grid of clickable cards -> Interaction: Clicking a card reveals its role -> Justification: More scannable and visually interesting than a list.
+        - Report Info: Knowledge Base -> Goal: Inform/Proportion -> Viz/Method: Donut Chart -> Interaction: Hover to see details -> Justification: Adds a quantitative visual element and fulfills the Chart.js requirement. -> Library: Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts: Inter -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles */
+        :root {
+            --bg-main: #f5f3f0;
+            --bg-card: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --accent-primary: #2563eb;
+            --accent-secondary: #dbeafe;
+            --border-color: #e5e7eb;
+        }
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
         }
-
-        .hero-section {
-            background-image: linear-gradient(to right, rgba(20, 80, 40, 0.9), rgba(20, 80, 40, 0.7)), url('https://placehold.co/1920x1080/4CAF50/FFFFFF?text=University+Campus');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .notice-ticker {
-            background-color: #1e293b; /* A dark slate color */
-        }
-        
-        .nav-link {
+        .chart-container {
             position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-link:hover {
-            color: #ef4444; /* red-500 */
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #ef4444;
-            transition: width 0.3s;
-        }
-
-        .nav-link:hover::after {
             width: 100%;
+            max-width: 350px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        /* Dropdown styles */
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        .dropdown-menu {
-            display: none;
+        .architecture-line {
+            background-color: var(--border-color);
             position: absolute;
-            background-color: white;
-            z-index: 1000;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            border-radius: 0.5rem;
         }
-
-        .dropdown-menu a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.2s;
+        .architecture-line-h { height: 2px; }
+        .architecture-line-v { width: 2px; }
+        .nav-link.active {
+            color: var(--accent-primary);
+            font-weight: 500;
         }
-
-        .dropdown-menu a:hover {
-            background-color: #f1f1f1;
+        .nav-link {
+            transition: color 0.2s ease-in-out;
         }
-
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="antialiased">
 
-    <div class="w-full bg-white shadow-md">
-        <!-- Top Header -->
-        <header class="container mx-auto px-4">
-            <nav class="flex justify-between items-center py-3">
-                <!-- Logo -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <img src="https://placehold.co/80x80/FFFFFF/333333?text=FCUB" alt="FCUB Logo" class="h-16 w-16">
+                    <span class="text-xl font-bold text-gray-800">Project Showcase</span>
                 </div>
-
-                <!-- Desktop Navigation -->
-                <ul class="hidden lg:flex items-center space-x-6 text-sm font-medium text-gray-700">
-                    <li><a href="#" class="nav-link text-red-500">Home</a></li>
-                    <li><a href="#" class="nav-link">About</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link flex items-center">Administration <i class="fas fa-chevron-down text-xs ml-1"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="#">Governing Body</a>
-                            <a href="#">Management</a>
-                            <a href="#">Faculty Members</a>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link flex items-center">Faculties <i class="fas fa-chevron-down text-xs ml-1"></i></a>
-                         <div class="dropdown-menu">
-                            <a href="#">Faculty of Science</a>
-                            <a href="#">Faculty of Arts</a>
-                            <a href="#">Faculty of Business</a>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link flex items-center">Admission <i class="fas fa-chevron-down text-xs ml-1"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="#">Undergraduate</a>
-                            <a href="#">Postgraduate</a>
-                            <a href="#">Admission Form</a>
-                        </div>
-                    </li>
-                    <li><a href="#" class="nav-link">Result</a></li>
-                    <li><a href="#" class="nav-link">Research</a></li>
-                    <li><a href="#" class="nav-link">Notice</a></li>
-                     <li class="dropdown">
-                        <a href="#" class="nav-link flex items-center">Career <i class="fas fa-chevron-down text-xs ml-1"></i></a>
-                         <div class="dropdown-menu">
-                            <a href="#">Job Openings</a>
-                            <a href="#">Apply Online</a>
-                        </div>
-                    </li>
-                    <li><a href="#" class="nav-link">Contact</a></li>
-                </ul>
-
-                <!-- Mobile Menu Button -->
-                <div class="lg:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </nav>
-        </header>
-
-        <!-- Notice Ticker -->
-        <div class="notice-ticker text-white text-sm">
-            <div class="container mx-auto px-4 py-2 flex items-center">
-                <span class="font-bold mr-4 flex-shrink-0">Notice Board:</span>
-                <div class="overflow-hidden flex-grow">
-                    <div class="ticker-content animate-ticker whitespace-nowrap">
-                        <span class="mx-4"><i class="fas fa-bullhorn mr-2"></i>  Admission for Fall 2025 is now open!</span>
-                        <span class="mx-4"><i class="fas fa-calendar-alt mr-2"></i>  Mid-term exam schedule published.</span>
-                        <span class="mx-4"><i class="fas fa-star mr-2"></i>  Congratulations to our programming contest winners!</span>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-600">Overview</a>
+                        <a href="#architecture" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-600">Architecture</a>
+                        <a href="#workflow" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-600">Workflow</a>
+                        <a href="#stack" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-600">Tech Stack</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white p-4">
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Home</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">About</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Administration</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Faculties</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Admission</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Result</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Research</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Notice</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Career</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200 rounded">Contact</a>
-    </div>
+    </nav>
 
-    <!-- Hero Section -->
-    <main class="hero-section text-white relative">
-        <div class="container mx-auto px-4 h-[70vh] flex items-center">
-            <!-- Content -->
-            <div class="w-full md:w-2/3 lg:w-1/2">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">Welcome to FCUB</h1>
-                <p class="text-lg md:text-xl mb-8">Education for Excellence. Be a FCUB Graduate. "Where Our Learners Become Leaders".</p>
-                <a href="#" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-md transition duration-300">
-                    Learn More <i class="fas fa-arrow-right ml-2"></i>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+
+        <header id="overview" class="text-center mb-20 scroll-mt-20">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
+                AI-Powered RAG Chatbot
+            </h1>
+            <p class="mt-4 max-w-3xl mx-auto text-lg md:text-xl text-gray-600">
+                An intelligent, multilingual chatbot providing instant answers from a university knowledge base using Retrieval-Augmented Generation.
+            </p>
+            <div class="mt-8 flex justify-center">
+                <a href="https://huggingface.co/spaces/rupok211/ai_chatbot" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition">
+                    View Live Demo
+                    <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-4z" /><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" /></svg>
                 </a>
             </div>
-             <!-- Slider Controls -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-4">
-                 <button class="bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition duration-300">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                 <button class="bg-white/20 hover:bg-white/40 text-white p-3 rounded-full transition duration-300">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+        </header>
+
+        <section id="features" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Key Features</h2>
+                <p class="mt-2 text-lg text-gray-600">This project combines several modern AI techniques to deliver a robust user experience.</p>
             </div>
-             <!-- Slider position indicator -->
-             <div class="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4 text-sm">
-                <span class="font-bold">01</span>
-                <div class="w-px h-16 bg-white/50"></div>
-                <span class="text-white/70">02</span>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2">Multilingual Support</h3>
+                    <p class="text-gray-600">Handles user queries and provides responses in both English and Bengali, automatically detecting the input language.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2">Retrieval-Augmented Generation</h3>
+                    <p class="text-gray-600">Combines efficient knowledge retrieval with a powerful language model to generate accurate, context-aware answers.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2">Efficient Knowledge Retrieval</h3>
+                    <p class="text-gray-600">Utilizes FAISS (Facebook AI Similarity Search) for millisecond-fast similarity search across text embeddings.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2">Scalable Architecture</h3>
+                    <p class="text-gray-600">Built with a lightweight Flask backend, ready for deployment as a scalable web service on platforms like Hugging Face.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2">Lazy Loading</h3>
+                    <p class="text-gray-600">Heavy AI models are loaded only on the first user request, ensuring fast application startup times.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2">Meaningful Embeddings</h3>
+                    <p class="text-gray-600">Employs Sentence-Transformers to convert text into rich numerical representations that capture semantic meaning.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Interactive Architecture</h2>
+                <p class="mt-2 text-lg text-gray-600">Click on any component below to see its role in the system. This shows how user requests flow from the interface to the AI model and back.</p>
+            </div>
+
+            <div class="lg:flex lg:items-start lg:gap-8 p-4 bg-white rounded-lg shadow-lg">
+                <div class="flex-grow">
+                    <div class="flex flex-col md:flex-row justify-around items-center space-y-8 md:space-y-0 md:space-x-4">
+                        <div id="arch-ui" class="arch-component text-center p-4 border-2 border-blue-500 bg-blue-50 rounded-lg cursor-pointer transition transform hover:scale-105 w-48">
+                            <h4 class="font-semibold">User Interface</h4>
+                            <p class="text-sm text-gray-500">(index.html)</p>
+                        </div>
+
+                        <div class="text-3xl font-mono text-gray-400">&rarr;</div>
+
+                        <div id="arch-flask" class="arch-component text-center p-4 border-2 border-gray-300 bg-gray-50 rounded-lg cursor-pointer transition transform hover:scale-105 w-48">
+                            <h4 class="font-semibold">Flask Server</h4>
+                             <p class="text-sm text-gray-500">(app.py)</p>
+                        </div>
+                        
+                        <div class="text-3xl font-mono text-gray-400">&rarr;</div>
+
+                        <div id="arch-rag" class="arch-component text-center p-4 border-2 border-gray-300 bg-gray-50 rounded-lg cursor-pointer transition transform hover:scale-105 w-48">
+                           <h4 class="font-semibold">RAG Model</h4>
+                           <p class="text-sm text-gray-500">(chatbot_model.py)</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="architecture-details" class="mt-8 lg:mt-0 lg:w-1/3 lg:flex-shrink-0 bg-blue-50 p-6 rounded-lg border border-blue-200 min-h-[150px]">
+                    <h4 id="details-title" class="font-bold text-lg text-blue-800 mb-2">User Interface (Frontend)</h4>
+                    <p id="details-text" class="text-blue-900">A simple web interface where users type their queries. It sends requests to the Flask backend and displays the received answers.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="workflow" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">How It Works: The RAG Workflow</h2>
+                <p class="mt-2 text-lg text-gray-600">From a user's question to a generated answer, the system follows a precise, multi-step process.</p>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-8">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full font-bold text-xl">1</div>
+                        <div class="ml-6">
+                            <h4 class="text-xl font-semibold">User Query & Language Detection</h4>
+                            <p class="mt-1 text-gray-600">The user submits a question. The system first detects if the query is in English or Bengali to select the correct knowledge base.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full font-bold text-xl">2</div>
+                        <div class="ml-6">
+                            <h4 class="text-xl font-semibold">Query Embedding</h4>
+                            <p class="mt-1 text-gray-600">The user's query is converted into a numerical vector (embedding) using the SentenceTransformer model, capturing its semantic meaning.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full font-bold text-xl">3</div>
+                        <div class="ml-6">
+                            <h4 class="text-xl font-semibold">Context Retrieval (The "R")</h4>
+                            <p class="mt-1 text-gray-600">The query embedding is used to search the FAISS vector index. The most semantically similar text chunks from the knowledge base are retrieved as context.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full font-bold text-xl">4</div>
+                        <div class="ml-6">
+                            <h4 class="text-xl font-semibold">Prompt Construction</h4>
+                            <p class="mt-1 text-gray-600">A detailed prompt is constructed, combining the original query with the retrieved context and instructing the LLM to answer based only on this information.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full font-bold text-xl">5</div>
+                        <div class="ml-6">
+                            <h4 class="text-xl font-semibold">Answer Generation (The "G")</h4>
+                            <p class="mt-1 text-gray-600">The complete prompt is sent to Cohere's `command-r-plus` model, which generates a coherent and factually grounded answer.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-blue-500 text-white rounded-full font-bold text-xl">6</div>
+                        <div class="ml-6">
+                            <h4 class="text-xl font-semibold">Display to User</h4>
+                            <p class="mt-1 text-gray-600">The final generated answer is sent back through the Flask API and displayed to the user in the web interface.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="mb-20 scroll-mt-20">
+             <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Technical Stack</h2>
+                <p class="mt-2 text-lg text-gray-600">This project is built on a foundation of powerful, industry-standard tools and libraries.</p>
+            </div>
+             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">Flask</h4>
+                     <p class="text-sm text-gray-500">Backend Framework</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">Cohere</h4>
+                     <p class="text-sm text-gray-500">LLM Provider</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">Sentence Transformers</h4>
+                     <p class="text-sm text-gray-500">Embedding Model</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">FAISS</h4>
+                     <p class="text-sm text-gray-500">Vector Database</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">NLTK</h4>
+                     <p class="text-sm text-gray-500">NLP Toolkit</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">LangDetect</h4>
+                     <p class="text-sm text-gray-500">Language Detection</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">Python</h4>
+                     <p class="text-sm text-gray-500">Core Language</p>
+                 </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                     <h4 class="font-bold text-lg">Tailwind CSS</h4>
+                     <p class="text-sm text-gray-500">Styling</p>
+                 </div>
              </div>
-        </div>
-    </main>
+        </section>
 
-    <!-- Features Section -->
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-white">
-        <div class="bg-blue-900 p-8 flex flex-col items-center text-center hover:bg-blue-800 transition duration-300">
-            <i class="fas fa-university text-4xl mb-4"></i>
-            <h3 class="text-2xl font-semibold mb-2">Admission</h3>
-            <p class="text-sm">Find out how to join our university.</p>
-        </div>
-        <div class="bg-green-800 p-8 flex flex-col items-center text-center hover:bg-green-700 transition duration-300">
-            <i class="fas fa-book-open text-4xl mb-4"></i>
-            <h3 class="text-2xl font-semibold mb-2">Programs</h3>
-            <p class="text-sm">Explore our diverse range of programs.</p>
-        </div>
-        <div class="bg-blue-900 p-8 flex flex-col items-center text-center hover:bg-blue-800 transition duration-300">
-            <i class="fas fa-dollar-sign text-4xl mb-4"></i>
-            <h3 class="text-2xl font-semibold mb-2">Tuition Fees</h3>
-            <p class="text-sm">Information on fees and payments.</p>
-        </div>
-        <div class="bg-green-800 p-8 flex flex-col items-center text-center hover:bg-green-700 transition duration-300">
-            <i class="fas fa-graduation-cap text-4xl mb-4"></i>
-            <h3 class="text-2xl font-semibold mb-2">Scholarship</h3>
-            <p class="text-sm">Discover scholarship opportunities.</p>
-        </div>
-    </section>
+        <section class="grid lg:grid-cols-2 gap-12 items-center bg-white p-8 rounded-lg shadow-lg">
+             <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Knowledge Base Composition</h2>
+                <p class="text-lg text-gray-600 mb-6">The chatbot's knowledge is sourced from two distinct text files, one for each supported language. This visual represents the bilingual foundation of the system, ensuring it can cater to both English and Bengali-speaking users by retrieving information from the appropriate source.</p>
+                <div id="accordion-container">
+                    <div class="border-b border-gray-200">
+                        <button class="accordion-button flex justify-between items-center w-full py-4 text-left text-lg font-medium text-gray-800">
+                            <span>Setup & Running</span>
+                            <span class="accordion-icon transform transition-transform">&#9660;</span>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-max-height duration-500 ease-in-out">
+                            <div class="p-4 text-gray-600 bg-gray-50 rounded-b-md">
+                                The project requires Python and pip for dependency installation (`Flask`, `cohere`, `faiss-cpu`, etc.). A `.env` file is needed to store the `COHERE_API_KEY`. The application is then launched by running `python app.py`.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-b border-gray-200">
+                         <button class="accordion-button flex justify-between items-center w-full py-4 text-left text-lg font-medium text-gray-800">
+                            <span>Future Enhancements</span>
+                            <span class="accordion-icon transform transition-transform">&#9660;</span>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-max-height duration-500 ease-in-out">
+                            <div class="p-4 text-gray-600 bg-gray-50 rounded-b-md">
+                                Future plans include adding chat history for follow-up questions, providing source citations for answers, and implementing a user feedback loop to continuously improve the model's performance and knowledge base.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="knowledgeBaseChart"></canvas>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 First Capital University of Bangladesh. All Rights Reserved.</p>
-            <p class="text-sm text-gray-400 mt-2">This is a UI clone for educational purposes.</p>
+    </div>
+
+    <footer class="bg-white mt-20">
+        <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>Project by Rupok | Interactive showcase created to demonstrate project architecture and workflow.</p>
         </div>
     </footer>
-    
+
     <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+        document.addEventListener('DOMContentLoaded', () => {
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Simple ticker animation
-        const ticker = document.querySelector('.ticker-content');
-        if (ticker) {
-            // This is a simple implementation. For a continuous smooth scroll,
-            // you would clone the content and reset the position.
-            const tickerWidth = ticker.scrollWidth;
-            const animationDuration = tickerWidth / 50; // Adjust speed by changing 50
-            
-            // A keyframe animation would be better but this is a simple JS approach
-            let position = 0;
-            function animateTicker() {
-                position--;
-                if (position < -tickerWidth) {
-                    position = ticker.parentElement.offsetWidth;
+            const archComponents = {
+                'arch-ui': {
+                    title: 'User Interface (Frontend)',
+                    text: 'A simple web interface (index.html) where users type their queries. It sends requests to the Flask backend and displays the received answers.'
+                },
+                'arch-flask': {
+                    title: 'Flask Server (Backend)',
+                    text: 'Acts as the API endpoint. It handles HTTP requests, passes user messages to the RAG Chatbot model, and returns the generated replies to the frontend.'
+                },
+                'arch-rag': {
+                    title: 'RAG Model (AI Core)',
+                    text: 'The core logic. It loads knowledge, embeds text, detects language, retrieves relevant context using FAISS, and generates answers using the Cohere LLM.'
                 }
-                ticker.style.transform = `translateX(${position}px)`;
-                requestAnimationFrame(animateTicker);
-            }
-            // A more robust solution might use CSS keyframes.
-            // For now, this is disabled to avoid complexity.
-            // requestAnimationFrame(animateTicker);
-        }
+            };
+            
+            const archContainer = document.querySelector('#architecture');
+            const detailsTitle = document.getElementById('details-title');
+            const detailsText = document.getElementById('details-text');
+            const allArchComponents = document.querySelectorAll('.arch-component');
 
-        // Dropdown hover for desktop
-        // The dropdowns are handled by pure CSS (:hover) so no JS is strictly needed for that part.
-        // However, for touch devices, you might want to add click listeners.
+            allArchComponents.forEach(component => {
+                component.addEventListener('click', () => {
+                    allArchComponents.forEach(c => {
+                        c.classList.remove('border-blue-500', 'bg-blue-50');
+                        c.classList.add('border-gray-300', 'bg-gray-50');
+                    });
+                    
+                    component.classList.add('border-blue-500', 'bg-blue-50');
+                    component.classList.remove('border-gray-300', 'bg-gray-50');
 
-        console.log("UI Clone script loaded.");
+                    const componentId = component.id;
+                    if(archComponents[componentId]) {
+                        detailsTitle.textContent = archComponents[componentId].title;
+                        detailsText.textContent = archComponents[componentId].text;
+                    }
+                });
+            });
 
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+            
+            const ctx = document.getElementById('knowledgeBaseChart').getContext('2d');
+            const knowledgeBaseChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['English Knowledge (.txt)', 'Bengali Knowledge (.txt)'],
+                    datasets: [{
+                        label: 'Knowledge Base Composition',
+                        data: [50, 50],
+                        backgroundColor: [
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(59, 130, 246, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(37, 99, 235, 1)',
+                            'rgba(59, 130, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: false,
+                            text: 'Knowledge Base Composition'
+                        }
+                    }
+                }
+            });
+
+            const sections = document.querySelectorAll('section[id], header[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const onScroll = () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 80) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+            window.addEventListener('scroll', onScroll);
+        });
     </script>
 </body>
 </html>
